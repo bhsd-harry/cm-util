@@ -1,0 +1,45 @@
+{
+	"name": "@bhsd/cm-util",
+	"version": "0.0.0",
+	"homepage": "https://github.com/bhsd-harry/cm-util#readme",
+	"bugs": {
+		"url": "https://github.com/bhsd-harry/cm-util/issues"
+	},
+	"license": "MIT",
+	"author": "Bhsd",
+	"files": [
+		"/dist/"
+	],
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"import": "./dist/index.mjs",
+			"require": "./dist/index.js"
+		}
+	},
+	"types": "./dist/index.d.ts",
+	"sideEffects": false,
+	"scripts": {
+		"prepublishOnly": "npm run build",
+		"build": "tsc && esbuild src/index.ts --charset=utf8 --target=es2024 --format=esm --outdir=dist --out-extension:.js=.mjs",
+		"lint:ts": "tsc --noEmit && eslint --cache .",
+		"lint": "npm run lint:ts"
+	},
+	"devDependencies": {
+		"@bhsd/code-standard": "^1.0.0",
+		"@stylistic/eslint-plugin": "^3.1.0",
+		"@typescript-eslint/eslint-plugin": "^8.35.1",
+		"@typescript-eslint/parser": "^8.35.1",
+		"esbuild": "^0.25.5",
+		"eslint": "^8.57.1",
+		"eslint-plugin-es-x": "^8.7.0",
+		"eslint-plugin-eslint-comments": "^3.2.0",
+		"eslint-plugin-jsdoc": "^51.3.3",
+		"eslint-plugin-json-es": "^1.6.0",
+		"eslint-plugin-promise": "^7.2.1",
+		"eslint-plugin-regexp": "^2.9.0",
+		"eslint-plugin-unicorn": "^56.0.1",
+		"typescript": "^5.8.2",
+		"wikiparser-node": "^1.21.3"
+	}
+}
