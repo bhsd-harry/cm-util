@@ -1,6 +1,6 @@
 {
 	"name": "@bhsd/cm-util",
-	"version": "0.0.0",
+	"version": "0.0.1",
 	"homepage": "https://github.com/bhsd-harry/cm-util#readme",
 	"bugs": {
 		"url": "https://github.com/bhsd-harry/cm-util/issues"
@@ -26,7 +26,7 @@
 		"lint": "npm run lint:ts"
 	},
 	"devDependencies": {
-		"@bhsd/code-standard": "^1.0.0",
+		"@bhsd/code-standard": "^1.0.1",
 		"@stylistic/eslint-plugin": "^3.1.0",
 		"@typescript-eslint/eslint-plugin": "^8.35.1",
 		"@typescript-eslint/parser": "^8.35.1",
