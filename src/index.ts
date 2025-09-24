@@ -26,6 +26,24 @@ declare interface Keywords {
 export const otherParserFunctions = new Set(['msg', 'raw', 'subst', 'safesubst']);
 
 /**
+ * 是否为使用`__`的状态开关
+ * @param s 状态开关
+ */
+export const isUnderscore = (s: string): boolean => !/^＿{2}.+＿{2}$/u.test(s);
+
+/**
+ * 移除以`：`结尾的无效别名
+ * @param aliases 别名列表
+ */
+export const cleanAliases = (aliases: Record<string, string>): void => {
+	for (const key in aliases) {
+		if (/^[^#＃].*：$/u.test(key)) {
+			delete aliases[key];
+		}
+	}
+};
+
+/**
  * 将魔术字信息转换为CodeMirror接受的设置
  * @param magicWords 完整魔术字列表
  * @param rule 过滤函数
@@ -61,10 +79,12 @@ export const getParserConfig = (minConfig: ConfigData, mwConfig: MwConfig): Conf
 		[insensitive, sensitive] = functionSynonyms,
 		behaviorSwitch = doubleUnderscore.map(
 			(obj, i) => Object.entries(obj).map(([k, v]) => [
-				k.slice(2, -2),
+				isUnderscore(k) ? k.slice(2, -2) : k,
 				i && typeof v === 'string' ? v.toUpperCase() : v,
 			] as const),
 		);
+	cleanAliases(insensitive);
+	cleanAliases(sensitive);
 	for (const [k, v] of Object.entries(insensitive)) {
 		if (k in sensitive) {
 			delete insensitive[k];
@@ -77,7 +97,9 @@ export const getParserConfig = (minConfig: ConfigData, mwConfig: MwConfig): Conf
 		ext: Object.keys(tags),
 		parserFunction: [{...insensitive}, {...sensitive, '=': '='}, [], []],
 		doubleUnderscore: [
-			...behaviorSwitch.map(entries => entries.map(([k]) => k)) as [string[], string[]],
+			...behaviorSwitch.map(
+				entries => entries.filter(([k]) => isUnderscore(k)).map(([k]) => k),
+			) as [string[], string[]],
 			...behaviorSwitch.map(Object.fromEntries) as [Record<string, string>, Record<string, string>],
 		],
 		protocol: urlProtocols.replace(/\|\\?\/\\?\/$|\\(?=[:/])/gu, ''),
