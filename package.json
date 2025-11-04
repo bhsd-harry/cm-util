@@ -1,6 +1,6 @@
 {
 	"name": "@bhsd/cm-util",
-	"version": "0.1.0",
+	"version": "0.2.0",
 	"homepage": "https://github.com/bhsd-harry/cm-util#readme",
 	"bugs": {
 		"url": "https://github.com/bhsd-harry/cm-util/issues"
@@ -26,20 +26,23 @@
 		"lint": "npm run lint:ts"
 	},
 	"devDependencies": {
-		"@bhsd/code-standard": "^1.3.0",
-		"@stylistic/eslint-plugin": "^5.5.0",
-		"@typescript-eslint/eslint-plugin": "^8.46.2",
-		"@typescript-eslint/parser": "^8.46.2",
-		"esbuild": "^0.25.11",
-		"eslint": "^9.38.0",
-		"eslint-plugin-es-x": "^9.1.2",
+		"@bhsd/code-standard": "^2.1.0",
+		"@stylistic/eslint-plugin": "^5.10.0",
+		"@typescript-eslint/eslint-plugin": "^8.57.0",
+		"@typescript-eslint/parser": "^8.57.0",
+		"esbuild": "^0.27.3",
+		"eslint": "^9.39.4",
+		"eslint-plugin-es-x": "^9.5.0",
 		"eslint-plugin-eslint-comments": "^3.2.0",
-		"eslint-plugin-jsdoc": "^61.1.11",
-		"eslint-plugin-jsonc": "^2.21.0",
+		"eslint-plugin-jsdoc": "^62.7.1",
+		"eslint-plugin-jsonc": "^3.1.1",
 		"eslint-plugin-promise": "^7.2.1",
-		"eslint-plugin-regexp": "^2.10.0",
-		"eslint-plugin-unicorn": "^62.0.0",
+		"eslint-plugin-regexp": "^3.1.0",
+		"eslint-plugin-unicorn": "^63.0.0",
 		"typescript": "^5.9.3",
-		"wikiparser-node": "^1.29.2"
+		"wikiparser-node": "^1.36.0"
+	},
+	"engines": {
+		"node": ">=20.19.0"
 	}
 }
