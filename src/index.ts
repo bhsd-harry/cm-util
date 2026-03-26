@@ -5,7 +5,7 @@ export interface MwConfig {
 	tagModes: Record<string, string>;
 	urlProtocols: string;
 	functionSynonyms: [Record<string, string>, Record<string, string>];
-	doubleUnderscore: [Record<string, unknown>, Record<string, unknown>];
+	doubleUnderscore: [Record<string, string>, Record<string, string>];
 	variableIDs?: string[];
 	functionHooks?: string[];
 	redirection?: string[];
@@ -80,16 +80,16 @@ export const getParserConfig = (minConfig: ConfigData, mwConfig: MwConfig): Conf
 		behaviorSwitch = doubleUnderscore.map(
 			(obj, i) => Object.entries(obj).map(([k, v]) => [
 				isUnderscore(k) ? k.slice(2, -2) : k,
-				i && typeof v === 'string' ? v.toUpperCase() : v,
+				i ? v.toUpperCase() : v,
 			] as const),
 		);
 	cleanAliases(insensitive);
 	cleanAliases(sensitive);
-	for (const [k, v] of Object.entries(insensitive)) {
+	for (const k in insensitive) {
 		if (k in sensitive) {
 			delete insensitive[k];
 		} else {
-			insensitive[k] = v.toLowerCase();
+			insensitive[k] = insensitive[k]!.toLowerCase();
 		}
 	}
 	return {
@@ -125,7 +125,7 @@ export const getKeywords = (magicwords: MagicWord[], web?: boolean): Keywords =>
 	img: Object.fromEntries(
 		magicwords.filter(({name: n}) => n.startsWith('img_') && n !== 'img_lossy')
 			.flatMap(({name: n, aliases}) => {
-				const k = web ? n : n.slice(4).replace(/_/gu, '-');
+				const k = web ? n : n.slice(4).replaceAll('_', '-');
 				return (n === 'img_alt' ? aliases.filter(alias => alias.includes('$1')) : aliases)
 					.map(alias => [alias, k]);
 			}),
