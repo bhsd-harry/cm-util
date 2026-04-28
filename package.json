@@ -1,6 +1,6 @@
 {
 	"name": "@bhsd/cm-util",
-	"version": "1.0.0",
+	"version": "1.1.0",
 	"homepage": "https://github.com/bhsd-harry/cm-util#readme",
 	"bugs": {
 		"url": "https://github.com/bhsd-harry/cm-util/issues"
@@ -20,6 +20,9 @@
 		"build": "tsc",
 		"lint:ts": "tsc --noEmit && eslint --cache .",
 		"lint": "npm run lint:ts"
+	},
+	"dependencies": {
+		"monaco-editor": "~0.53.0"
 	},
 	"devDependencies": {
 		"@bhsd/code-standard": "^2.3.0",
