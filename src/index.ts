@@ -1,25 +1,8 @@
 import type {ConfigData} from 'wikiparser-node/dist/base';
-import type {editor, IRange} from 'monaco-editor';
+export type * from './monaco.js';
 
 export type Option = Record<string, unknown> | null | undefined;
 export type LiveOption = (runtime?: boolean) => Option | Promise<Option>;
-/* eslint-disable @typescript-eslint/method-signature-style */
-export interface ILinter {
-	lint?: (text: string, opt?: Option | LiveOption) => editor.IMarkerData[] | Promise<editor.IMarkerData[]>;
-	fixer?: (text: string, rule?: string) => string | Promise<string>;
-}
-declare interface ITextModelLinter extends ILinter {
-	glyphs: string[];
-	timer?: number;
-	disabled?: boolean;
-	option?: Option | LiveOption;
-}
-export interface IWikitextModel extends editor.ITextModel {
-	linter?: ITextModelLinter;
-	lint?: (this: IWikitextModel, on?: boolean) => Promise<void>;
-	getRangeAt?: (start: number, end: number) => IRange;
-}
-/* eslint-enable @typescript-eslint/method-signature-style */
 
 export interface MwConfig {
 	readonly tags: Record<string, true>;
