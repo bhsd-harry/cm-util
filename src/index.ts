@@ -114,7 +114,7 @@ export const getParserConfig = (minConfig: ConfigData, mwConfig: MwConfig): Conf
 			) as [string[], string[]],
 			...behaviorSwitch.map(Object.fromEntries) as [Record<string, string>, Record<string, string>],
 		],
-		protocol: urlProtocols.replace(/\|\\?\/\\?\/$|\\(?=[:/])/gu, ''),
+		protocol: urlProtocols.replaceAll(/\|\\?\/\\?\/$|\\(?=[:/])/gu, ''),
 		...variableIDs && {variable: [...new Set([...variableIDs, '='])]},
 		...functionHooks && {functionHook: [...new Set([...functionHooks.map(s => s.toLowerCase()), 'msgnw'])]},
 		...redirection && {redirection: redirection.map(s => s.toLowerCase())},
