@@ -13,6 +13,8 @@ export interface MwConfig {
 	variableIDs?: string[];
 	functionHooks?: string[];
 	redirection?: string[];
+	subst?: Record<string, string>;
+	imageKeywords?: Record<string, string>;
 }
 
 export interface MagicWord {
@@ -87,6 +89,8 @@ export const getParserConfig = (minConfig: ConfigData, mwConfig: MwConfig): Conf
 			variableIDs,
 			functionHooks,
 			redirection,
+			subst,
+			imageKeywords,
 		} = mwConfig,
 		[insensitive, sensitive] = functionSynonyms,
 		behaviorSwitch = doubleUnderscore.map(
@@ -107,7 +111,7 @@ export const getParserConfig = (minConfig: ConfigData, mwConfig: MwConfig): Conf
 	return {
 		...minConfig,
 		ext: Object.keys(tags),
-		parserFunction: [{...insensitive}, {...sensitive, '=': '='}, [], []],
+		parserFunction: [{...insensitive}, {...sensitive, '=': '='}, [], subst ? Object.keys(subst) : []],
 		doubleUnderscore: [
 			...behaviorSwitch.map(
 				entries => entries.filter(([k]) => isUnderscore(k)).map(([k]) => k),
@@ -118,6 +122,7 @@ export const getParserConfig = (minConfig: ConfigData, mwConfig: MwConfig): Conf
 		...variableIDs && {variable: [...new Set([...variableIDs, '='])]},
 		...functionHooks && {functionHook: [...new Set([...functionHooks.map(s => s.toLowerCase()), 'msgnw'])]},
 		...redirection && {redirection: redirection.map(s => s.toLowerCase())},
+		...imageKeywords && {img: imageKeywords},
 	};
 };
 
