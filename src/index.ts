@@ -24,11 +24,6 @@ export interface MagicWord {
 }
 export type MagicRule = (word: MagicWord) => boolean;
 
-declare interface Keywords {
-	img: Record<string, string>;
-	redirection: string[];
-}
-
 export const otherParserFunctions = new Set(['msg', 'raw', 'subst', 'safesubst']);
 
 /**
@@ -122,7 +117,11 @@ export const getParserConfig = (minConfig: ConfigData, mwConfig: MwConfig): Conf
 		...variableIDs && {variable: [...new Set([...variableIDs, '='])]},
 		...functionHooks && {functionHook: [...new Set([...functionHooks.map(s => s.toLowerCase()), 'msgnw'])]},
 		...redirection && {redirection: redirection.map(s => s.toLowerCase())},
-		...imageKeywords && {img: imageKeywords},
+		...imageKeywords && {
+			img: Object.fromEntries(
+				Object.entries(imageKeywords).filter(([v, k]) => k !== 'alt' || v.includes('$1')),
+			),
+		},
 	};
 };
 
@@ -138,14 +137,24 @@ export const getVariants = (variants: {code: string}[] | undefined): string[] =>
  * @param magicwords 魔术字列表
  * @param web 是否用于网页
  */
-export const getKeywords = (magicwords: MagicWord[], web?: boolean): Keywords => ({
-	img: Object.fromEntries(
-		magicwords.filter(({name: n}) => n.startsWith('img_') && n !== 'img_lossy')
-			.flatMap(({name: n, aliases}) => {
-				const k = web ? n : n.slice(4).replaceAll('_', '-');
-				return (n === 'img_alt' ? aliases.filter(alias => alias.includes('$1')) : aliases)
-					.map(alias => [alias, k]);
-			}),
-	),
-	redirection: magicwords.find(({name: n}) => n === 'redirect')!.aliases.map(s => s.toLowerCase()),
-});
+export function getKeywords(magicwords: MagicWord[], web?: false): Pick<ConfigData, 'img' | 'redirection'>;
+export function getKeywords(
+	magicwords: MagicWord[],
+	web: true,
+): Required<Pick<MwConfig, 'imageKeywords' | 'redirection'>>;
+export function getKeywords(
+	magicwords: MagicWord[],
+	web?: boolean,
+): Required<Pick<MwConfig, 'imageKeywords' | 'redirection'>> | Pick<ConfigData, 'img' | 'redirection'> {
+	return {
+		[(web ? 'imageKeywords' : 'img') as 'img']: Object.fromEntries(
+			magicwords.filter(({name: n}) => n.startsWith('img_') && n !== 'img_lossy')
+				.flatMap(({name: n, aliases}) => {
+					const k = n.slice(4).replaceAll('_', '-');
+					return (k === 'alt' ? aliases.filter(alias => alias.includes('$1')) : aliases)
+						.map(alias => [alias, k]);
+				}),
+		),
+		redirection: magicwords.find(({name: n}) => n === 'redirect')!.aliases.map(s => s.toLowerCase()),
+	};
+}

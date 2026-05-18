@@ -1,6 +1,6 @@
 {
 	"name": "@bhsd/cm-util",
-	"version": "1.1.0",
+	"version": "2.0.0",
 	"homepage": "https://github.com/bhsd-harry/cm-util#readme",
 	"bugs": {
 		"url": "https://github.com/bhsd-harry/cm-util/issues"
@@ -25,8 +25,8 @@
 		"monaco-editor": "~0.53.0"
 	},
 	"devDependencies": {
-		"@bhsd/code-standard": "^2.4.2",
-		"@typescript-eslint/parser": "^8.59.2",
+		"@bhsd/code-standard": "^2.5.0",
+		"@typescript-eslint/parser": "^8.59.4",
 		"esbuild": "^0.28.0",
 		"eslint": "^10.4.0",
 		"typescript": "^6.0.3",
