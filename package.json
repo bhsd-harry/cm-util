@@ -1,6 +1,6 @@
 {
 	"name": "@bhsd/cm-util",
-	"version": "2.0.1",
+	"version": "2.1.0",
 	"homepage": "https://github.com/bhsd-harry/cm-util#readme",
 	"bugs": {
 		"url": "https://github.com/bhsd-harry/cm-util/issues"
@@ -21,16 +21,16 @@
 		"lint:ts": "tsc --noEmit && eslint --cache .",
 		"lint": "npm run lint:ts"
 	},
-	"dependencies": {
-		"monaco-editor": "~0.53.0"
+	"peerDependencies": {
+		"monaco-editor": ">=0.11.0"
 	},
 	"devDependencies": {
-		"@bhsd/code-standard": "^2.5.0",
-		"@typescript-eslint/parser": "^8.59.4",
+		"@bhsd/code-standard": "^2.6.2",
 		"esbuild": "^0.28.0",
-		"eslint": "^10.4.0",
+		"eslint": "^10.4.1",
+		"monaco-editor": "~0.53.0",
 		"typescript": "^6.0.3",
-		"wikiparser-node": "^1.40.0"
+		"wikiparser-node": "^1.42.0"
 	},
 	"engines": {
 		"node": "^20.19.0 || ^22.13.0 || >=24.11.0"
