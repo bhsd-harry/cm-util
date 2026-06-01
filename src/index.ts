@@ -133,6 +133,34 @@ export const getParserConfig = (minConfig: ConfigData, mwConfig: MwConfig): Conf
 export const getVariants = (variants: {code: string}[] | undefined): string[] =>
 	variants?.map(({code}) => code) ?? [];
 
+const variantMap: Record<string, string> = {
+	'sr-ec': 'sr-Cyrl',
+	'sr-el': 'sr-Latn',
+	'zh-cn': 'zh-Hans-CN',
+	'zh-sg': 'zh-Hans-SG',
+	'zh-my': 'zh-Hans-MY',
+	'zh-tw': 'zh-Hant-TW',
+	'zh-hk': 'zh-Hant-HK',
+	'zh-mo': 'zh-Hant-MO',
+};
+
+/**
+ * 获取BCP 47语言变体
+ * @param variants 语言变体列表
+ */
+export const getBCP47Variants = (variants: string[]): string[] => {
+	if (variants.length === 0 || variants.some(v => v.toLowerCase() !== v)) {
+		return variants;
+	}
+	const variantSet = new Set(variants);
+	for (const v of variants) {
+		try {
+			variantSet.add(variantMap[v] ?? String(new Intl.Locale(v)));
+		} catch {}
+	}
+	return [...variantSet];
+};
+
 /**
  * 获取图片和重定向关键字
  * @param magicwords 魔术字列表

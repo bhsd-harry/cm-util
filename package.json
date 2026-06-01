@@ -1,6 +1,6 @@
 {
 	"name": "@bhsd/cm-util",
-	"version": "2.1.0",
+	"version": "2.2.0",
 	"homepage": "https://github.com/bhsd-harry/cm-util#readme",
 	"bugs": {
 		"url": "https://github.com/bhsd-harry/cm-util/issues"
@@ -24,13 +24,18 @@
 	"peerDependencies": {
 		"monaco-editor": ">=0.11.0"
 	},
+	"peerDependenciesMeta": {
+		"monaco-editor": {
+			"optional": true
+		}
+	},
 	"devDependencies": {
 		"@bhsd/code-standard": "^2.6.2",
 		"esbuild": "^0.28.0",
 		"eslint": "^10.4.1",
 		"monaco-editor": "~0.53.0",
 		"typescript": "^6.0.3",
-		"wikiparser-node": "^1.42.0"
+		"wikiparser-node": "^1.43.0"
 	},
 	"engines": {
 		"node": "^20.19.0 || ^22.13.0 || >=24.11.0"
