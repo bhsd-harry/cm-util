@@ -12,6 +12,10 @@
 	],
 	"main": "./dist/index.js",
 	"types": "./dist/index.d.ts",
+	"exports": {
+		".": "./dist/index.js",
+		"./cm": "./dist/cm.js"
+	},
 	"type": "module",
 	"sideEffects": false,
 	"scripts": {
@@ -22,19 +26,29 @@
 		"lint": "npm run lint:ts"
 	},
 	"peerDependencies": {
+		"@codemirror/state": "^6.0.0",
+		"@codemirror/view": "^6.0.0",
 		"monaco-editor": ">=0.11.0"
 	},
 	"peerDependenciesMeta": {
+		"@codemirror/state": {
+			"optional": true
+		},
+		"@codemirror/view": {
+			"optional": true
+		},
 		"monaco-editor": {
 			"optional": true
 		}
 	},
 	"devDependencies": {
-		"@bhsd/code-standard": "^3.0.0",
-		"eslint": "^10.5.0",
+		"@bhsd/code-standard": "^3.1.0",
+		"@codemirror/state": "^6.7.1",
+		"@codemirror/view": "^6.43.6",
+		"eslint": "^10.6.0",
 		"monaco-editor": "~0.53.0",
 		"typescript": "^6.0.3",
-		"wikiparser-node": "^1.44.0"
+		"wikiparser-node": "^1.45.0"
 	},
 	"engines": {
 		"node": "^20.19.0 || ^22.13.0 || >=24.11.0"
