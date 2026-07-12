@@ -97,7 +97,7 @@ export const getParserConfig = (minConfig: ConfigData, mwConfig: MwConfig): Conf
 	cleanAliases(insensitive);
 	cleanAliases(sensitive);
 	for (const k in insensitive) {
-		if (k in sensitive) {
+		if (Object.hasOwn(sensitive, k)) {
 			delete insensitive[k];
 		} else {
 			insensitive[k] = insensitive[k]!.toLowerCase();
