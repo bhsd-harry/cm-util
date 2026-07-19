@@ -21,7 +21,7 @@
 	"scripts": {
 		"ls": "npm i --package-lock-only && npm ls --package-lock-only --all --omit=dev",
 		"prepublishOnly": "npm run build",
-		"build": "tsc",
+		"build": "tsc && esbuild src/cm.ts --charset=utf8 --target=es2017 --format=esm --outfile=dist/cm.js && eslint --no-config-lookup -c eslint.dist.js dist/*.js && eslint --no-config-lookup -c eslint.es8.js dist/cm.js",
 		"lint:ts": "tsc --noEmit && eslint --cache .",
 		"lint": "npm run lint:ts"
 	},

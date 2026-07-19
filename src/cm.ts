@@ -8,7 +8,7 @@ declare interface SignatureHelp {
 }
 declare interface SignatureEffect<T extends SignatureHelp> {
 	signatureHelp?: T | undefined;
-	class?: string;
+	class?: string | undefined;
 	text: string;
 	cursor: number;
 }
@@ -104,17 +104,15 @@ export const getSignatureHelpExtension = <T extends SignatureHelp>({
 					effect: SignatureEffect<T> = {
 						text: doc.toString(),
 						cursor: main.head,
-						...typeof className === 'object' && {class: state.facet(className)},
+						class: typeof className === 'object' ? state.facet(className) : undefined,
 					};
 				if (!main.empty) {
 					dispatchSignatureEffect(view, effect);
 					return;
 				}
 				(async () => {
-					dispatchSignatureEffect(view, {
-						...effect,
-						signatureHelp: await update(view, state, effect),
-					});
+					effect.signatureHelp = await update(view, state, effect);
+					dispatchSignatureEffect(view, effect);
 				})();
 			}
 		}),
