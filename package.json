@@ -1,6 +1,6 @@
 {
 	"name": "@bhsd/cm-util",
-	"version": "2.3.0",
+	"version": "2.4.0",
 	"homepage": "https://github.com/bhsd-harry/cm-util#readme",
 	"bugs": {
 		"url": "https://github.com/bhsd-harry/cm-util/issues"
@@ -42,7 +42,7 @@
 		}
 	},
 	"devDependencies": {
-		"@bhsd/code-standard": "^3.2.0",
+		"@bhsd/code-standard": "^3.3.0",
 		"@codemirror/state": "^6.7.1",
 		"@codemirror/view": "^6.43.6",
 		"eslint": "^10.7.0",
