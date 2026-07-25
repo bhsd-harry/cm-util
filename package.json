@@ -1,6 +1,6 @@
 {
 	"name": "@bhsd/cm-util",
-	"version": "2.4.0",
+	"version": "2.4.1",
 	"homepage": "https://github.com/bhsd-harry/cm-util#readme",
 	"bugs": {
 		"url": "https://github.com/bhsd-harry/cm-util/issues"
@@ -21,7 +21,7 @@
 	"scripts": {
 		"ls": "npm i --package-lock-only && npm ls --package-lock-only --all --omit=dev",
 		"prepublishOnly": "npm run build",
-		"build": "tsc && esbuild src/cm.ts --charset=utf8 --target=es2017 --format=esm --outfile=dist/cm.js && eslint --no-config-lookup -c eslint.dist.js dist/*.js && eslint --no-config-lookup -c eslint.es8.js dist/cm.js",
+		"build": "tsc && esbuild src/cm.ts --charset=utf8 --target=es2019 --format=esm --outfile=dist/cm.js && eslint --no-config-lookup -c eslint.dist.js dist/*.js",
 		"lint:ts": "tsc --noEmit && eslint --cache .",
 		"lint": "npm run lint:ts"
 	},
@@ -42,13 +42,13 @@
 		}
 	},
 	"devDependencies": {
-		"@bhsd/code-standard": "^3.3.0",
+		"@bhsd/code-standard": "^4.1.0",
 		"@codemirror/state": "^6.7.1",
-		"@codemirror/view": "^6.43.6",
-		"eslint": "^10.7.0",
+		"@codemirror/view": "^6.43.8",
+		"eslint": "^10.8.1",
 		"monaco-editor": "~0.53.0",
 		"typescript": "^6.0.3",
-		"wikiparser-node": "^1.46.1"
+		"wikiparser-node": "^1.46.2"
 	},
 	"engines": {
 		"node": "^20.19.0 || ^22.13.0 || >=24.11.0"

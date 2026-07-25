@@ -29,7 +29,6 @@ const dict: Record<string, string> = {'\n': '<br>', '&': '&amp;', '<': '&lt;'};
  * 转义HTML字符串
  * @param text 原字符串
  */
-// eslint-disable-next-line unicorn/prefer-string-replace-all
 export const escHTML = (text: string): string => text.replace(/[\n<&]/gu, ch => dict[ch]!);
 
 /**
