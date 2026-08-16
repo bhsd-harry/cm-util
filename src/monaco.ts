@@ -14,6 +14,6 @@ declare interface ITextModelLinter extends ILinter {
 }
 export interface IWikitextModel extends editor.ITextModel {
 	linter?: ITextModelLinter;
-	lint?: (this: IWikitextModel, on?: boolean) => Promise<void>;
+	lint?: (this: this, on?: boolean) => Promise<void>;
 	getRangeAt?: (start: number, end: number) => IRange;
 }
