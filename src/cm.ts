@@ -67,17 +67,22 @@ export const getSignatureHelpExtension = <T extends SignatureHelp>({
 			create() {
 				return undefined;
 			},
-			update(oldValue, {state: {doc, selection: {main: {head}}}, effects}) {
-				const text = doc.toString();
+			update(oldValue, tr) {
+				const {effects, newSelection: {main: {head}}, docChanged, selection} = tr;
 				for (const effect of effects) {
 					if (effect.is(signatureEffect)) {
 						const {value} = effect;
-						if (head === value.cursor && text === value.text) {
+						if (head === value.cursor && tr.newDoc.toString() === value.text) {
 							return value;
 						}
 					}
 				}
-				return oldValue;
+				return oldValue && (docChanged || selection)
+					? {
+						...oldValue,
+						cursor: head,
+					}
+					: oldValue;
 			},
 			provide(f) {
 				return showTooltip.from(f, (value): Tooltip | null => {
