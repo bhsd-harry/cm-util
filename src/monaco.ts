@@ -1,6 +1,6 @@
-/* eslint-disable @typescript-eslint/method-signature-style */
+/* oxlint-disable @typescript-eslint/method-signature-style */
 import type {editor, IRange} from 'monaco-editor';
-import type {Option, LiveOption} from './index.js'; // eslint-disable-line @typescript-eslint/no-shadow
+import type {Option, LiveOption} from './index.js';
 
 export interface ILinter {
 	lint?: (text: string, opt?: Option | LiveOption) => editor.IMarkerData[] | Promise<editor.IMarkerData[]>;
